@@ -1,5 +1,6 @@
 "use client"
 import { createContext, useContext, useState } from 'react';
+import useLocalStorage from "@/hooks/useLocalStorage";
 //creamos un contexto
 export const TaskContext = createContext();
 
@@ -16,14 +17,16 @@ export const useTasks = () => {
 //creamos el proveedor
 export const TaskProvider = ({ children }) => {
 
+    const [tasks, setTask] = useLocalStorage("tasks", []);
+    // const [tasks, setTask] = useState();
 
-    const [tasks, setTask] = useState([
-        { id: 1, title: "Tarea 1", description: "Descripcion de la tarea 1" },
-        { id: 2, title: "Tarea 2", description: "Descripcion de la tarea 2" },
-        { id: 3, title: "Tarea 3", description: "Descripcion de la tarea 3" },
-    ]);
+    // useEffect(() => {
+    //     setTask(localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks")) : []);
+    // }, [])
 
-
+    // useEffect(() => {
+    //     localStorage.setItem("tasks", JSON.stringify(tasks));
+    // }, [tasks])
 
 
     const createTask = (title, description) => {
@@ -40,11 +43,16 @@ export const TaskProvider = ({ children }) => {
     }
 
 
+    const updateTask = (id, updateTask) => {
+        setTask([...tasks.map(task => task.id === id ? { ...task, ...updateTask } : task)]);
+    }
+
+
     //con el atributo value en nuestro provider
     //podemos pasarle propiedades que van a utilizar
     //los demas componentes
     return (
-        <TaskContext.Provider value={ { tasks, createTask, deleteTask } } >
+        <TaskContext.Provider value={ { tasks, createTask, deleteTask, updateTask } } >
             { children }
         </TaskContext.Provider>
     )

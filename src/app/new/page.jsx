@@ -6,16 +6,16 @@ import { useRouter } from "next/navigation";
 const Page = ({ params }) => {
 
     const [task, setTask] = useState({ title: "", description: "" });
-    const { tasks, createTask } = useTasks();
+    const { tasks, createTask, updateTask } = useTasks();
     const router = useRouter();
 
     useEffect(() => {
         if (params.id) {
             const taskFound = tasks.find(task => task.id === Number(params.id));
             console.log(taskFound)
-            if (taskFound) setTask(taskFound.title, taskFound.description);
+            if (taskFound) setTask(taskFound);
         }
-    }, [])
+    }, [params.id, tasks])
 
     const handleChange = (event) => {
         // console.log([event.target.name], event.target.value);
@@ -28,7 +28,7 @@ const Page = ({ params }) => {
 
 
         if (params.id) {
-            console.log("editando...")
+            updateTask(task.id, task);
         } else {
 
             createTask(task.title, task.description);
@@ -36,6 +36,8 @@ const Page = ({ params }) => {
 
         router.push('/');
     }
+
+    // console.log(task.title, task.description);
 
     return (
         <form onSubmit={ handleSubmit } >

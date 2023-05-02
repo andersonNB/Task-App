@@ -9,7 +9,7 @@ const Page = () => {
   return (
     <div>Home page
 
-      { tasks.map((task) => {
+      { tasks && tasks.map((task) => {
         return (
           <TaskCard task={ task } key={ task.id } />
         )
