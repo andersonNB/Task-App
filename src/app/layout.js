@@ -1,7 +1,8 @@
-import Navbar from "@/components/Navbar"
-import { TaskProvider } from "../context/TasksContext"
-import { Inter } from 'next/font/google'
-import './globals.css'
+import Navbar from "@/components/Navbar";
+import { TaskProvider } from "../context/TasksContext";
+import { Inter } from "next/font/google";
+import { Toaster } from "./Toaster";
+import "./globals.css";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <TaskProvider>
           { children }
+          <Toaster />
         </TaskProvider>
       </body>
     </html>

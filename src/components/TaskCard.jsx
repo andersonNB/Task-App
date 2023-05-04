@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useTasks } from "@/context/TasksContext";
+import { toast } from "react-hot-toast";
 
 export const TaskCard = ({ task }) => {
     //este useRouter es el enrutador de next en su versión 13
@@ -12,6 +13,7 @@ export const TaskCard = ({ task }) => {
 
         const aceptar = window.confirm("¿Estas seguro de eliminar esta tarea?");
         if (aceptar) deleteTask(task.id);
+        toast.success("Tarea eliminada exitosamente");
     }
 
     return (
