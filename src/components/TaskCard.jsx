@@ -17,10 +17,18 @@ export const TaskCard = ({ task }) => {
     }
 
     return (
-        <div style={ { backgroundColor: "#202020", color: "white" } } onClick={ () => router.push(`/edit/${task.id}`) }>
-            <h3>{ task.title }</h3>
-            <button onClick={ handleDelete } >Delete</button>
-            <p>{ task.description }</p>
+        <div className="bg-gray-700 p-5 rounded-md shadow-md cursor-pointer hover:bg-slate-600 px-20 py-5 m-2"
+            onClick={ () => router.push(`/edit/${task.id}`) }>
+
+            <div className="flex justify-between">
+                <h3>{ task.title }</h3>
+                <button
+                    className="bg-red-600 hover:bg-red-500 px-5 py-2 text-gray-50 rounded-md mr-3 font-bold"
+                    onClick={ handleDelete } >Delete</button>
+            </div>
+
+            <p className="text-gray-300" >{ task.description }</p>
+            <span className="text-gray-400 text-xs" >id: { task.id }</span>
         </div>
     )
 }

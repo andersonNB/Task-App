@@ -45,13 +45,22 @@ const Page = ({ params }) => {
     // console.log(task.title, task.description);
 
     return (
-        <form onSubmit={ onSubmit } >
-            <input type="text" placeholder="Escribe un titulo" { ...register("title", { required: true }) } />
-            { errors.title && <span>Este campo es requerido</span> }
-            <textarea placeholder="Escribe una descripción" { ...register("description", { required: true }) } />
-            { errors.description && <span>Este campo es requerido</span> }
-            <button>Guardar</button>
-        </form>
+        <div className="flex justify-center items-center h-full">
+            <form onSubmit={ onSubmit } className="bg-gray-700 p-10" >
+                <h2>New Task</h2>
+                <input
+                    className="bg-gray-800 py-3 px-4 mb-2 block focus:outline-none w-full"
+                    type="text" placeholder="Escribe un titulo"
+                    { ...register("title", { required: true }) } />
+                { errors.title && <span className="block text-red-400 mb-2">Este campo es requerido</span> }
+                <textarea
+                    className="bg-gray-800 py-3 px-4 mb-2 block focus:outline-none w-full"
+                    placeholder="Escribe una descripción"
+                    { ...register("description", { required: true }) } />
+                { errors.description && <span className="block text-red-400 mb-2">Este campo es requerido</span> }
+                <button className="bg-green-500 hover:bg-green-400 px-4 py-2 rounded-sm disabled:opacity-30" >Guardar</button>
+            </form>
+        </div>
     )
 }
 

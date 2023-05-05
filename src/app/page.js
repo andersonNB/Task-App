@@ -7,14 +7,17 @@ const Page = () => {
   const { tasks } = useTasks();
 
   return (
-    <div>Home page
 
-      { tasks && tasks.map((task) => {
-        return (
-          <TaskCard task={ task } key={ task.id } />
-        )
-      }) }
+    <div className="flex justify-center">
+      <div className="w-7/12">
+        Home page
+        { tasks && tasks.map((task) => {
+          return (
+            <TaskCard task={ task } key={ task.id } />
+          )
+        }) }
 
+      </div>
     </div>
   )
 }
